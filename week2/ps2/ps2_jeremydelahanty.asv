@@ -94,6 +94,45 @@ text(0.05, 0.95, ...
 % all the data! Use view(3) to force a 3D perspective.
 view(3);
 
+% Bonus Problem
+% Data corresponding to different time points are to be represented using
+% symbols of increasing size, with early time points represented using
+% small symbols or markers and later data points represented using large
+% symbols
+
+% The hint for the bonus problem tells us to use scatter3 instead of plot3.
+% If we look online, this is because scatter lets you have different size
+% scaling for each datapoint!
+
+% We know that we have 7 timepoints, so we can make an array for the sizes
+% of each marker that will be used in plotting later.
+timePoints = 7;
+
+% Start with a minimum marker size of 10
+minimumMarkerSize = 10;
+
+% Set a maximum marker size of 70
+maximumMarkerSize = 70;
+
+% Make the array! We can use linspace for this because we can just have
+% increments of 10 added evenly up to 70.
+markerSizes = linspace(minimumMarkerSize, maximumMarkerSize, timePoints);
+
+figure("Name", "ps2_1a_bonus");
+hold on;
+grid on;
+
+% We can loop again over our timepoints and get a different marker
+% size depending on which time point we are in!
+
+% For each patient...
+for p = 1:numPatients
+    % Loop over each time point for a different marker size
+    for t = 1:timePoints
+            % Draw Drug a's data point as a red circle and use size
+            scatter3(d)
+
+
 %% Problem 2: Errorband
 % Dataset: ps2_3_errb.mat
 % Recall the idea of "errorband" discussed in class (visualizing a series
@@ -202,7 +241,7 @@ set(t, 'fontsize', 18)
 % mean, std, sem, text "normal" if normal, and "not normal" if not!
 
 % The implementation is within the file GetMeanSE.m submitted in the
-% problemset.
+% problem set.
 
 %% Problem 5: Figuring out what Sum is up to
 % x is a 3D matrix. Say, x = rand(3,5,2); Try typing sum(x). What does it
@@ -220,4 +259,6 @@ sum(x)
 % The help function tells us that the sum function returns the sum of
 % elements of a matrix A along the first array dimension whose size does
 % not equal one. Our first dimension of rows is 3! This means that MATLAB
-% will sum down the rows
+% will sum down the rows! So we end up with a result of a:
+% 1x5x2 matrix!
+% Its a sum of the rows for each column and there are two slices!

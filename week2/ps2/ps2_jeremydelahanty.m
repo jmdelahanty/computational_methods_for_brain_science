@@ -94,6 +94,84 @@ text(0.05, 0.95, ...
 % all the data! Use view(3) to force a 3D perspective.
 view(3);
 
+% Bonus Problem
+% Data corresponding to different time points are to be represented using
+% symbols of increasing size, with early time points represented using
+% small symbols or markers and later data points represented using large
+% symbols
+
+% The hint for the bonus problem tells us to use scatter3 instead of plot3.
+% If we look online, this is because scatter lets you have different size
+% scaling for each datapoint!
+
+% We know that we have 7 timepoints, so we can make an array for the sizes
+% of each marker that will be used in plotting later.
+timePoints = 7;
+
+% Start with a minimum marker size of 10
+minimumMarkerSize = 10;
+
+% Set a maximum marker size of 70
+maximumMarkerSize = 70;
+
+% Make the array! We can use linspace for this because we can just have
+% increments of 10 added evenly up to 70.
+markerSizes = linspace(minimumMarkerSize, maximumMarkerSize, timePoints);
+
+figure("Name", "ps2_1a_bonus");
+hold on;
+grid on;
+
+% We can loop again over our timepoints and get a different marker
+% size depending on which time point we are in!
+
+% For each patient...
+for p = 1:numPatients
+    % Loop over each time point for a different marker size
+    for t = 1:timePoints
+            % Draw Drug a's data point as a red circle and use size
+            scatter3(drugaData{p}(t,1), ...
+                drugaData{p}(t,2), ...
+                drugaData{p}(t,3), ...
+                markerSizes(t), "r", "filled", "o")
+            % Draw Drug b's data points as a blue square and use size
+            scatter3(drugbData{p}(t,1), ...
+                drugbData{p}(t,2), ...
+                drugbData{p}(t,3), ...
+                markerSizes(t), "b", "filled", "s")
+    end
+end
+
+% Use the problem set's definitions for formatting
+set(gca, 'Color', 'white', ...  % make the background of our figure white
+    'GridColor', [[0.5, 0.5, 0.5]]) % make grey gridlines for the plot
+ax = gca; % Get the currently manipulated axis
+x = xlabel('Blood Pressure (normalized)');
+ax.XAxis.FontSize = 10; % first set ticks + label to 10
+ax.XLabel.FontSize = 15; % then alter just the label to be 15!
+y = ylabel('Reaction Time (normalized)');
+ax.YAxis.FontSize = 10;
+ax.YLabel.FontSize = 15;
+z = zlabel('Cognitive Performance (normalized)');
+ax.ZAxis.FontSize = 10;
+ax.ZLabel.FontSize = 15;
+t = title('Responses of Patients to Drug a and Drug b over Time');
+set(t, 'fontsize', 18)
+legend({'Drug a','Drug b'}, 'Location','best');
+% Lastly, set the text as specified in the problemset for part B
+% 1B
+text(0.05, 0.95, ...
+     'Red -> Effect of drug 1, Blue -> Effect of drug 2', ...
+     'Units', 'normalized', ...       % interpret x,y as [0..1] of axes
+     'FontSize', 12, ...              % set text font size
+     'Color', 'w', ...                % text color
+     'Interpreter', 'none');          % to show symbols exactly as typed
+
+% If you don't force MATLAB to use a 3D perspective, it won't show you
+% all the data! Use view(3) to force a 3D perspective.
+view(3);
+
+
 %% Problem 2: Errorband
 % Dataset: ps2_3_errb.mat
 % Recall the idea of "errorband" discussed in class (visualizing a series
