@@ -27,4 +27,3 @@ stats.w     = ones(length(means),1);
 % stats.sstot = sum((means'.*stats.w - mean(means'.*stats.w)).^2);
 % stats.sse   = sum((stats.resid.*stats.w).^2);
 % stats.rsq     = 1-stats.sse/stats.sstot;
-
